@@ -33,18 +33,19 @@ USE WideWorldImporters
 select p.PersonID, p.FullName
 from Application.People p
 where p.IsSalesperson = 1
-  and exists(select i.SalespersonPersonID, i.InvoiceDate
+  and NOT exists(select i.SalespersonPersonID, i.InvoiceDate
              from Sales.Invoices i
-             where not i.InvoiceDate = '20150704'
+             where i.InvoiceDate = '20150704'
                and I.SalespersonPersonID = p.PersonID)
 ;
-WITH sales (SalePersonId, SaleDate) as (select i.SalespersonPersonID, i.InvoiceDate
+WITH sales (SalePersonId) as (select DISTINCT i.SalespersonPersonID
                                         from Sales.Invoices i
-                                        where not i.InvoiceDate = '20150704')
-select distinct p.PersonID, p.FullName
+                                        where i.InvoiceDate = '20150704'
+                             )
+select distinct p.PersonID, p.FullName, s.SalePersonId
 from Application.People p
-         inner join sales s on s.SalePersonId = p.PersonID
-where p.IsSalesperson = 1
+         LEFT join sales s on s.SalePersonId = p.PersonID
+where p.IsSalesperson = 1 and s.SalePersonId is NULL
 
 /*
 2. Выберите товары с минимальной ценой (подзапросом). Сделайте два варианта подзапроса.
@@ -53,9 +54,8 @@ where p.IsSalesperson = 1
 
 select si.StockItemID, si.StockItemName, si.UnitPrice
 from Warehouse.StockItems si
-where UnitPrice = (select top 1 min(siInn.UnitPrice)
-                   from Warehouse.StockItems siInn
-                   group by siInn.UnitPrice)
+where UnitPrice = (select min(siInn.UnitPrice)
+                   from Warehouse.StockItems siInn)
 ;
 with LowestItemPrice (ItemId) as (select top 1 siInn.StockItemID
                                   from Warehouse.StockItems siInn

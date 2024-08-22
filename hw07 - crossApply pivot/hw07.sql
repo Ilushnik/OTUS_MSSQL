@@ -50,14 +50,14 @@ group by o.OrderDate, c.CustomerName*/
 
 WITH CustomerPurchase AS (
  SELECT
-  c.CustomerName, o.OrderDate,COUNT(*) AS OrderCount
+  c.CustomerName,  DATEADD(DAY,1,EOMONTH(o.OrderDate,-1)) AS OrderDate, COUNT(*) AS OrderCount
 FROM Sales.Orders o
 INNER JOIN Sales.OrderLines ol ON o.OrderID = ol.OrderID
 INNER JOIN Sales.Customers c ON o.CustomerID = c.CustomerID
 WHERE o.CustomerID IN (2, 3, 4)
-group by o.OrderDate, c.CustomerName
+group BY DATEADD(DAY,1,EOMONTH(o.OrderDate,-1)) , c.CustomerName
 )
-SELECT p.OrderDate
+SELECT FORMAT(p.OrderDate, 'dd.MM.yyyy')
       ,p.[Tailspin Toys (Medicine Lodge, KS)] AS [Medicine Lodge, KS]
       ,p.[Tailspin Toys (Peeples Valley, AZ)] AS [Peeples Valley, AZ]
       ,p.[Tailspin Toys (Sylvanite, MT)] AS [Sylvanite, MT]
@@ -69,7 +69,7 @@ PIVOT (
 	SUM(OrderCount)
 	FOR CustomerName IN ([Tailspin Toys (Medicine Lodge, KS)], [Tailspin Toys (Peeples Valley, AZ)], [Tailspin Toys (Sylvanite, MT)])
 ) p
-ORDER BY p.OrderDate
+ORDER BY p.orderdate;
 
 
 

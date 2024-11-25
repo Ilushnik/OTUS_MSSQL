@@ -9,20 +9,20 @@ go;
 -- 3-4 основные таблицы для своего проекта.
 -- Первичные и внешние ключи для всех созданных таблиц.
 CREATE TABLE dbo.Client (
-  ClientId int PRIMARY KEY NOT NULL,
+  ClientId int IDENTITY(1,1) PRIMARY KEY NOT NULL,
   Name nvarchar(50) NOT NULL,
   Surname nvarchar(50) NOT NULL,
   PhoneNumber nvarchar(50)
 );
 
 CREATE TABLE dbo.SubscriptionType (
-  SubscriptionTypeId int PRIMARY KEY NOT NULL,
+  SubscriptionTypeId int IDENTITY(1,1)  PRIMARY KEY NOT NULL,
   Name nvarchar(50) NOT NULL,
-  Price money NOT NULL,
+  Price int NOT NULL,
   DurationInDays int NOT NULL
 );
 CREATE TABLE dbo.[Transaction] (
-  TransactionId int PRIMARY KEY NOT NULL,
+  TransactionId int IDENTITY(1,1)  PRIMARY KEY NOT NULL,
   Date datetime2 NOT NULL,
   Price money NOT NULL
 );
@@ -36,7 +36,7 @@ CREATE TABLE dbo.[User] (
 GO
 
 CREATE TABLE dbo.Subscription (
-  SubscriptionId int,
+  SubscriptionId int IDENTITY(1,1)  PRIMARY KEY  ,
   SubscriptionTypeId int NOT NULL,
   ClientId int NOT NULL,
   PurchaseDate datetime2 NOT NULL,
@@ -67,3 +67,12 @@ create index Transaction_Date_Price_index
 Alter table dbo.Client  ADD CHECK (len(Client.PhoneNumber)=11)
 Alter table dbo.SubscriptionType  ADD CHECK (Price>0)
 Alter table dbo.[User]  ADD CHECK (len(trim(Password))>10)
+
+
+CREATE VIEW SubscriptionSoldByUser
+as
+SELECT u.Name, COUNT(*) SubscriptionSoldCountfrom, SUM(t.Price) as ReceivedMoney
+FROM dbo.Subscription s
+       INNER JOIN dbo.[User] u ON u.UserId = s.SoldUserId
+       INNER JOIN dbo.[Transaction] t ON s.TransactionId = t.TransactionId
+GROUP BY u.Name

@@ -1,0 +1,74 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Julia\\DataGripProjects\\otus\\hw37 - CLR\\MsSQLCLRFunctions\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E6DEF732-A5AD-45A8-8969-CBB83A02AF0B}|MsSQLCLRFunctions\\MsSQLCLRFunctions.csproj|c:\\users\\julia\\datagripprojects\\otus\\hw37 - clr\\mssqlclrfunctions\\mssqlclrfunctions\\aggregate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6DEF732-A5AD-45A8-8969-CBB83A02AF0B}|MsSQLCLRFunctions\\MsSQLCLRFunctions.csproj|solutionrelative:mssqlclrfunctions\\aggregate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6DEF732-A5AD-45A8-8969-CBB83A02AF0B}|MsSQLCLRFunctions\\MsSQLCLRFunctions.csproj|C:\\Users\\Julia\\DataGripProjects\\otus\\hw37 - CLR\\MsSQLCLRFunctions\\mssqlclrfunctions\\customcrlfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6DEF732-A5AD-45A8-8969-CBB83A02AF0B}|MsSQLCLRFunctions\\MsSQLCLRFunctions.csproj|solutionrelative:mssqlclrfunctions\\customcrlfunctions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6DEF732-A5AD-45A8-8969-CBB83A02AF0B}|MsSQLCLRFunctions\\MsSQLCLRFunctions.csproj|c:\\users\\julia\\datagripprojects\\otus\\hw37 - clr\\mssqlclrfunctions\\mssqlclrfunctions\\demo.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{E6DEF732-A5AD-45A8-8969-CBB83A02AF0B}|MsSQLCLRFunctions\\MsSQLCLRFunctions.csproj|solutionrelative:mssqlclrfunctions\\demo.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6DEF732-A5AD-45A8-8969-CBB83A02AF0B}|MsSQLCLRFunctions\\MsSQLCLRFunctions.csproj|c:\\users\\julia\\datagripprojects\\otus\\hw37 - clr\\mssqlclrfunctions\\mssqlclrfunctions\\demo.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
+      "RelativeMoniker": "D:0:0:{E6DEF732-A5AD-45A8-8969-CBB83A02AF0B}|MsSQLCLRFunctions\\MsSQLCLRFunctions.csproj|solutionrelative:mssqlclrfunctions\\demo.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "aggregate.cs",
+              "DocumentMoniker": "C:\\Users\\Julia\\DataGripProjects\\otus\\hw37 - CLR\\MsSQLCLRFunctions\\MsSQLCLRFunctions\\aggregate.cs",
+              "RelativeDocumentMoniker": "MsSQLCLRFunctions\\aggregate.cs",
+              "ToolTip": "C:\\Users\\Julia\\DataGripProjects\\otus\\hw37 - CLR\\MsSQLCLRFunctions\\MsSQLCLRFunctions\\aggregate.cs",
+              "RelativeToolTip": "MsSQLCLRFunctions\\aggregate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-07T20:50:01.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Demo.sql ",
+              "DocumentMoniker": "C:\\Users\\Julia\\DataGripProjects\\otus\\hw37 - CLR\\MsSQLCLRFunctions\\MsSQLCLRFunctions\\Demo.sql",
+              "RelativeDocumentMoniker": "MsSQLCLRFunctions\\Demo.sql",
+              "ToolTip": "C:\\Users\\Julia\\DataGripProjects\\otus\\hw37 - CLR\\MsSQLCLRFunctions\\MsSQLCLRFunctions\\Demo.sql",
+              "RelativeToolTip": "MsSQLCLRFunctions\\Demo.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-12-07T18:41:02.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomCRLFunctions.cs",
+              "DocumentMoniker": "C:\\Users\\Julia\\DataGripProjects\\otus\\hw37 - CLR\\MsSQLCLRFunctions\\MsSQLCLRFunctions\\CustomCRLFunctions.cs",
+              "RelativeDocumentMoniker": "MsSQLCLRFunctions\\CustomCRLFunctions.cs",
+              "ToolTip": "C:\\Users\\Julia\\DataGripProjects\\otus\\hw37 - CLR\\MsSQLCLRFunctions\\MsSQLCLRFunctions\\CustomCRLFunctions.cs",
+              "RelativeToolTip": "MsSQLCLRFunctions\\CustomCRLFunctions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-07T18:35:14.598Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+C:\Users\Julia\DataGripProjects\otus\hw37 - CLR\MsSQLCLRFunctions\MsSQLCLRFunctions\bin\Debug\MsSQLCLRFunctions.dll
+C:\Users\Julia\DataGripProjects\otus\hw37 - CLR\MsSQLCLRFunctions\MsSQLCLRFunctions\bin\Debug\MsSQLCLRFunctions.pdb
+C:\Users\Julia\DataGripProjects\otus\hw37 - CLR\MsSQLCLRFunctions\MsSQLCLRFunctions\obj\Debug\MsSQLCLRFunctions.csproj.AssemblyReference.cache
+C:\Users\Julia\DataGripProjects\otus\hw37 - CLR\MsSQLCLRFunctions\MsSQLCLRFunctions\obj\Debug\MsSQLCLRFunctions.csproj.CoreCompileInputs.cache
+C:\Users\Julia\DataGripProjects\otus\hw37 - CLR\MsSQLCLRFunctions\MsSQLCLRFunctions\obj\Debug\MsSQLCLRFunctions.dll
+C:\Users\Julia\DataGripProjects\otus\hw37 - CLR\MsSQLCLRFunctions\MsSQLCLRFunctions\obj\Debug\MsSQLCLRFunctions.pdb

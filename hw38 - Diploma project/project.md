@@ -1,13 +1,20 @@
--- Создать базу данных.
+### CRM система по учету абонементов тренажерного зала.
+ Фирма организует продажу абонементов в тренажерный зал. Компания определяет доступные типы абонементов, его цену и длительность. Система хранит информацию о всех проданных абонементах, сотрудниках его продавшего и выручку
 
+Диаграмма базы данных:
+![Диаграмма БД](dbDiagram.png)
+
+Центральным звеном является абонемент, который, в свою чередь ссылается на тип купленнго абонмента (SubscriptionType), клиента купившего его(Client), платеж сделанный клиентом (Transaction) и сотрудник, продавший данный абонемент(User)
+
+
+База и таблицы созданы с помощью запроса 
+``` sql
 create database fitness_crm
 go
 
 use fitness_crm;
 go;
 
--- 3-4 основные таблицы для своего проекта.
--- Первичные и внешние ключи для всех созданных таблиц.
 CREATE TABLE dbo.Client (
   ClientId int IDENTITY(1,1) PRIMARY KEY NOT NULL,
   Name nvarchar(50) NOT NULL,
@@ -40,8 +47,8 @@ CREATE TABLE dbo.Subscription (
   SubscriptionTypeId int NOT NULL,
   ClientId int NOT NULL,
   PurchaseDate datetime2 NOT NULL,
-  ActiveStartDate datetime2,
-  ActiveEndDate datetime2,
+  ActiveStartDate datetime2 NOT NULL,
+  ActiveEndDate datetime2 NOT NULL,
   SoldUserId int NOT NULL,
   TransactionId int NOT NULL,
   FOREIGN KEY (ClientId) REFERENCES Client (ClientId),
@@ -51,73 +58,38 @@ CREATE TABLE dbo.Subscription (
 );
 GO
 
+```
 
+В таблицах применяются ограничения при добавлении данных:
+``` sql
+Alter table dbo.Client  ADD CHECK (len(Client.PhoneNumber)=11)
+Alter table dbo.SubscriptionType  ADD CHECK (Price>0)
+Alter table dbo.[User]  ADD CHECK (len(trim(Password))>10)
+```
 
--- 1-2 индекса на таблицы.
-
-
+Для ускорения поиска клиента по номеру телефона и подсчета количества выручки в кассе, добавлены индексы
+``` sql
 create unique index Client_PhoneNumber_uindex
     on Client (PhoneNumber)
 
 create index Transaction_Date_Price_index
     on [Transaction] (Date, Price)
-
--- Наложите по одному ограничению в каждой таблице на ввод данных.
-
-Alter table dbo.Client  ADD CHECK (len(Client.PhoneNumber)=11)
-Alter table dbo.SubscriptionType  ADD CHECK (Price>0)
-Alter table dbo.[User]  ADD CHECK (len(trim(Password))>10)
+```
 
 
-CREATE VIEW SubscriptionSoldByUser
-as
-SELECT u.Name, COUNT(*) SubscriptionSoldCountfrom, SUM(t.Price) as ReceivedMoney
-FROM dbo.Subscription s
-       INNER JOIN dbo.[User] u ON u.UserId = s.SoldUserId
-       INNER JOIN dbo.[Transaction] t ON s.TransactionId = t.TransactionId
-GROUP BY u.Name
-
-Alter VIEW DataWarehouseExample
-as SELECT --s.SubscriptionId,
-       row_number() OVER (ORDER BY s.PurchaseDate, u.UserId) N,
-          s.PurchaseDate,
-          s.ActiveStartDate,
-          s.ActiveEndDate,
-          --s.SoldUserId,
-          --t.TransactionId,
-          t.Date,
-          t.Price as TransactionPrice,
-          --c.ClientId,
-          c.Name as ClientName,
-          c.Surname  as ClientSurname,
-          c.PhoneNumber,
-         -- u.UserId,
-          u.Name as UserName,
-          u.Surname as UserSurname,
-          u.Password,
-          st.SubscriptionTypeId,
-          st.Name as SubscriptionTypeName,
-          st.Price SubscriptionTypeNamePrice,
-          st.DurationInDays
-   from dbo.Subscription s
-INNER JOIN dbo.[Transaction] t ON s.TransactionId = t.TransactionId
-INNER JOIN dbo.Client c ON c.ClientId = s.ClientId
-INNER JOIN dbo.[User] u ON u.UserId = s.SoldUserId
-inner JOIN dbo.SubscriptionType st on s.SubscriptionTypeId = st.SubscriptionTypeId
-
-SELECT * from DataWarehouseExample dwe
-
-
+В качестве демо были добавлены следующие данные
+``` sql
 SET IDENTITY_INSERT dbo.Client ON;
 INSERT INTO fitness_crm.dbo.Client (ClientId, Name, Surname, PhoneNumber) VALUES (2, N'Клиент 1', N' ', 11111111111);
 INSERT INTO fitness_crm.dbo.Client (ClientId, Name, Surname, PhoneNumber) VALUES (3, N'Клиент 2', N' ', 22222222222);
 INSERT INTO fitness_crm.dbo.Client (ClientId, Name, Surname, PhoneNumber) VALUES (4, N'Клиент 3', N' ', 33333333333);
 SET IDENTITY_INSERT dbo.Client OFF;
 
-
+SET IDENTITY_INSERT dbo.[User] ON;
 INSERT INTO fitness_crm.dbo.[User] (UserId, Name, Surname, Password) VALUES (1, N'Администратор 1', N'', N'11111111111');
 INSERT INTO fitness_crm.dbo.[User] (UserId, Name, Surname, Password) VALUES (2, N'Администратор 2', N'', N'22222222222222');
 INSERT INTO fitness_crm.dbo.[User] (UserId, Name, Surname, Password) VALUES (3, N'Администратор 3', N'', N'3333333333333333');
+SET IDENTITY_INSERT dbo.[User] OFF;
 
 
 SET IDENTITY_INSERT dbo.SubscriptionType ON;
@@ -136,4 +108,18 @@ INSERT INTO fitness_crm.dbo.Subscription (SubscriptionId, SubscriptionTypeId, Cl
 INSERT INTO fitness_crm.dbo.Subscription (SubscriptionId, SubscriptionTypeId, ClientId, PurchaseDate, ActiveStartDate, ActiveEndDate, SoldUserId, TransactionId) VALUES (5, 1, 3, N'2024-11-25 20:35:08.0000000', N'2024-11-25 20:35:11.0000000', N'2024-12-25 20:35:14.0000000', 1, 2);
 INSERT INTO fitness_crm.dbo.Subscription (SubscriptionId, SubscriptionTypeId, ClientId, PurchaseDate, ActiveStartDate, ActiveEndDate, SoldUserId, TransactionId) VALUES (6, 2, 4, N'2024-11-19 20:37:47.0000000', N'2024-12-01 20:37:53.0000000', N'2024-03-01 20:38:46.0000000', 2, 3);
 SET IDENTITY_INSERT dbo.Subscription OFF;
+```
 
+Для построения аналитики подсчета количества проданных абонементов создано представление
+``` sql
+CREATE VIEW SubscriptionSoldByUser
+as
+SELECT u.Name, COUNT(*) SubscriptionSoldCountfrom, SUM(t.Price) as ReceivedMoney
+FROM dbo.Subscription s
+       INNER JOIN dbo.[User] u ON u.UserId = s.SoldUserId
+       INNER JOIN dbo.[Transaction] t ON s.TransactionId = t.TransactionId
+GROUP BY u.Name
+```
+![Аналитика в Power BI](SubscriptionCountSold.png)
+
+![Аналитика в Excel](SubscriptionCountSoldToExcel.png)
